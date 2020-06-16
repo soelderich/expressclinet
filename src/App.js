@@ -5,7 +5,7 @@ import AddForm from './components/AddForm'
 import EditForm from './components/EditForm'
 
 // const url = 'http://localhost:4000/api/'
-const url = 'http://simplelistserver-env.eba-eny7zm3e.eu-central-1.elasticbeanstalk.com/api/'
+const url = 'https://pikapika.azurewebsites.net/api'
 
 const App = () => {
 
