@@ -19,7 +19,7 @@ const ThingsTable = (props) => {
                             <td>{thing.name}</td>
                             <td>{thing.description}</td>
                             <td>
-                                <button className="button is-primary" onClick={() => props.editRow(thing)}>Edit</button>
+                                <button className="button" onClick={() => props.editRow(thing)}>Edit</button>
                                 { " " }
                                 <button className="button is-danger" onClick={() => props.delThing(thing.id)}>Delete</button>
                             </td>

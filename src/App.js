@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+
 import ThingsTable from './components/ThingsTable'
 import AddForm from './components/AddForm'
 import EditForm from './components/EditForm'
 
-// const url = 'http://localhost:4000/api/'
-// const url = 'https://pikapika.azurewebsites.net/api/'
+import axios from 'axios'
+
 const url = 'https://simple-list-server.herokuapp.com/api/'
 
 const App = () => {
-
-  // const dummyData = [
-  //   { id: 1, name: 'DUMMY Book', description: `It's a book` },
-  //   { id: 2, name: 'DUMMY Game', description: `It's a game` },
-  //   { id: 3, name: 'DUMMY Spoon', description: `It's not a knife` }
-  // ]
-
-  const dummyData = []
 
   useEffect(() => {
     axios.get(url).then((res) => {
@@ -25,7 +17,7 @@ const App = () => {
     })
   }, [])
 
-  const [things, setThings] = useState(dummyData)
+  const [things, setThings] = useState([])
   const [editing, setEditing] = useState(false)
   const initialFormState = { id: undefined, name: '', username: '' }
 
@@ -65,37 +57,49 @@ const App = () => {
         setThings(things.map(thing => (thing.id === id ? res.data : thing)))
       }
     })
-
   }
 
   return (
     <React.Fragment>
-      <section className="hero is-primary">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">Simple List of Things</h1>
+
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">List of Things</h1>
+          </div>
+        </div>
+      </section>
+      
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-half">
+              {
+                editing
+                  ? (
+                    <React.Fragment>
+                      <h4 className="title is-4">Edit</h4>
+                      <EditForm setEditing={setEditing} currentThing={currentThing} updateThing={updateThing} />
+                    </React.Fragment>
+                  )
+                  : (
+                    <React.Fragment>
+                      <h4 className="title is-4">Add New</h4>
+                      <AddForm addThing={addThing} />
+                    </React.Fragment>
+                  )
+              }
+
+              <br />
+              <br />
+              <h2 className="title is-2">View things</h2>
+              <ThingsTable things={things} editRow={editRow} delThing={delThing} />
+            </div>
           </div>
         </div>
       </section>
 
-      {
-        !editing
-          ? (
-            <React.Fragment>
-              <h2>Add thing</h2>
-              <AddForm addThing={addThing} />
-            </React.Fragment>
-          )
-          : (
-            <React.Fragment>
-              <h2>Edit thing</h2>
-              <EditForm setEditing={setEditing} currentThing={currentThing} updateThing={updateThing} />
-            </React.Fragment>
-          )
-      }
 
-      <h2>View things</h2>
-      <ThingsTable things={things} editRow={editRow} delThing={delThing} />
     </React.Fragment>
   )
 }

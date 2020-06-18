@@ -19,23 +19,36 @@ const EditForm = props => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Id</label>
-            <input type="text" name="id" value={thing.id} readOnly />
-            <label>Name</label>
-            <input type="text" name="name" value={thing.name} onChange={handleInputChange} />
-            <label>Description</label>
-            <input type="text" name="description" value={thing.description} onChange={handleInputChange} />
-            <div className="field is-grouped">
-                <div className="control">
-                    <button className="button is-link">Add thing</button>
+        <div className="box">
+            <form onSubmit={handleSubmit}>
+                <div className="field">
+                    <label className="label">Id</label>
+                    <div className="control">
+                        <input className="input" type="text" name="id" value={thing.id} disabled />
+                    </div>
                 </div>
-                <div className="control">
-                    <button className="button is-link is-light" onClick={() => props.setEditing(false)}>Cancel</button>
+                <div className="field">
+                    <label className="label">Name</label>
+                    <div className="control">
+                        <input className="input" type="text" name="name" value={thing.name} onChange={handleInputChange} />
+                    </div>
                 </div>
-            </div>
-
-        </form>
+                <div className="field">
+                    <label className="label">Description</label>
+                    <div className="control">
+                        <input className="input" type="text" name="description" value={thing.description} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <button className="button is-link">Add thing</button>
+                    </div>
+                    <div className="control">
+                        <button className="button is-link is-light" onClick={() => props.setEditing(false)}>Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }
 
